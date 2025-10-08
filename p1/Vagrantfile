@@ -79,10 +79,25 @@ Vagrant.configure("2") do |config|
     control.vm.network "private_network", ip: "192.168.56.110"
     control.vm.provider "virtualbox" do |vm|
       vm.customize ["modifyvm", :id, "--name", "jrossettS"]
+      vm.gui = false
+      vm.memory = "512"
+      vm.cpus = "1"
     end
     config.vm.provision "shell", inline: <<-SHELL
       apt update
-      apt full-upgrade -y
+    SHELL
+  end
+  config.vm.define "hubretecSW" do |control|
+    control.vm.hostname = "hubretecSW"
+    control.vm.network "private_network", ip: "192.168.56.111"
+    control.vm.provider "virtualbox" do |vm|
+      vm.customize ["modifyvm", :id, "--name", "hubretecSW"]
+      vm.gui = false
+      vm.memory = "512"
+      vm.cpus = "1"
+    end
+    config.vm.provision "shell", inline: <<-SHELL
+      apt update
     SHELL
   end
 end
