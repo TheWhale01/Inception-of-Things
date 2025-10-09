@@ -11,5 +11,5 @@ sudo rmmod kvm
 sudo rmmod kvm_amd
 ```
 
-- Vagrant
-- VirtualBox
+- Vagrant (2.4.9)
+- VirtualBox (7.2)
