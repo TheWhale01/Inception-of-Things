@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pgadmin
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pgadmin
+  template:
+    metadata:
+      labels:
+        app: pgadmin
+    spec:
+      containers:
+        - name: pgadmin
+          image: elestio/pgadmin:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+              name: pgadmin
+              protocol: TCP
+          env:
+            - name: PGADMIN_LISTEN_PORT
+              value: "8080"
+            - name: PGADMIN_DEFAULT_EMAIL
+              value: "inceptionofthings@gmail.com"
+            - name: PGADMIN_DEFAULT_PASSWORD
+              value: "1234"
+          readinessProbe:
+            httpGet:
+              port: pgadmin
+              path: /

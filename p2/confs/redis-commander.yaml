@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redis-commander
+  namespace: default
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: redis-commander
+  template:
+    metadata:
+      labels:
+        app: redis-commander
+    spec:
+      containers:
+        - name: redis-commander
+          image: ghcr.io/joeferner/redis-commander:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8081
+              name: redis-commander
+              protocol: TCP
+          readinessProbe:
+            httpGet:
+              port: redis-commander
+              path: /
