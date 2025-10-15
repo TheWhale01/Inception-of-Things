@@ -13,10 +13,11 @@ kubectl wait --for=condition=Established --timeout=120s crd/applications.argopro
 kubectl -n argocd wait --for=condition=Ready pod --all --timeout=180s
 kubectl -n kube-system wait --for=condition=Ready --timeout=120s pod -l app.kubernetes.io/name=traefik
 
-# kubectl -n argocd patch deploy argocd-server \
-#   -p '{"spec":{"template":{"spec":{"containers":[{"name":"argocd-server","args":["--insecure"]}]}}}}'
+# ByPass HTTPS connection
+kubectl -n argocd patch configmap argocd-cmd-params-cm --type merge -p '{"data":{"server.insecure":"true"}}'
+kubectl -n argocd rollout restart deploy/argocd-server
+kubectl -n argocd wait --for=condition=Available deploy/argocd-server --timeout=120s
 
 # Apply the Argo CD Application
 kubectl apply -n argocd -f ./confs/argocd-application.yaml
-# sleep 5
 kubectl apply -n argocd -f ./confs/argocd-ingress.yaml
