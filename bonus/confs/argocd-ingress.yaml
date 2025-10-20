@@ -8,7 +8,7 @@ metadata:
 spec:
   tls: [{}]
   rules:
-  - host: argocd.localhost
+  - host: argocd.iot.com
     http:
       paths:
       - path: /

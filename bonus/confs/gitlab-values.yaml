@@ -1,0 +1,20 @@
+global:
+  edition: ce
+  hosts:
+    domain: iot.com
+    externalIP: 0.0.0.0
+    https: false
+  ingress:
+    configureCertmanager: false
+    class: nginx
+prometheus:
+  install: false
+gitlab-runner:
+  install: true
+nginx-ingress:
+  install: false
+gitlab:
+  webservice:
+    hpa:
+      minReplicas: 1
+      maxReplicas: 1
