@@ -23,7 +23,7 @@ kubectl --namespace gitlab exec -it deployment/gitlab-toolbox -- /srv/gitlab/bin
 curl --request POST --header "PRIVATE-TOKEN: ${GITLAB_PERSONAL_ACCESS_TOKEN}" \
         --url "http://gitlab.iot.com:8181/api/v4/projects" \
         --form "visibility=public" --form "name=jrossett"
-git clone https://github.com/J-Rossetti/jrossett.git
+git clone git@github.com:J-Rossetti/jrossett.git
 cd jrossett
 git remote add gitlab http://gitlab.iot.com:8181/root/jrossett
 git push gitlab main
@@ -39,5 +39,5 @@ kubectl -n argocd rollout restart deploy/argocd-server
 kubectl -n argocd wait --for=condition=Available deploy/argocd-server --timeout=120s
 
 # Apply the Argo CD Application
-kubectl apply -n argocd -f /home/whale/code/Inception-of-Things/bonus/confs/argocd-application.yaml
-kubectl apply -n argocd -f /home/whale/code/Inception-of-Things/bonus/confs/argocd-ingress.yaml
+kubectl apply -n argocd -f /home/whale/Documents/Inception-of-Things/bonus/confs/argocd-application.yaml
+kubectl apply -n argocd -f /home/whale/Documents/Inception-of-Things/bonus/confs/argocd-ingress.yaml

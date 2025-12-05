@@ -13,3 +13,5 @@ sudo rmmod kvm_amd
 
 - Vagrant (2.4.9)
 - VirtualBox (7.2)
+
+*__NOTE:__* Do not forget to clone the [app repo](https://github.com/J-Rossetti/jrossett) for the p3 and the bonus
